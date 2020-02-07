@@ -1,0 +1,21 @@
+---
+-  hosts: all
+   become:  yes
+   tasks:
+   -  name:  downloading shell scripts to install k8s
+      shell: |
+        https://github.com/satishnaidu143/install.git
+        sudo sh install/kube.sh
+---
+-  hosts: master
+   become:  yes
+   tasks:
+   -  name:  initializing kube adm
+      shell: |
+        sudo kubeadm init
+        mkdir -p $HOME/.kube
+        sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+        sudo chown $(id -u):$(id -g) $HOME/.kube/config
+        kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+        git clone https://github.com/satishnaidu143/Kubernetes-examples.git          
+        
