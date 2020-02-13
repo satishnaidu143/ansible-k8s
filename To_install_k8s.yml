@@ -4,8 +4,7 @@
    tasks:
    -  name:  downloading shell scripts to install k8s
       shell: |
-        https://github.com/satishnaidu143/install.git
-        sudo sh install/kube.sh
+        sudo sh ansible-k8s/kube.sh
 ---
 -  hosts: master
    become:  yes
