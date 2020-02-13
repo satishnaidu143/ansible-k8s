@@ -5,6 +5,7 @@
    -  name:  downloading shell scripts to install k8s
       shell: |
         sudo sh ansible-k8s/kube.sh
+        
 ---
 -  hosts: master
    become:  yes
